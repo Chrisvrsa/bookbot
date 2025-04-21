@@ -1,31 +1,30 @@
-# A with block opens a file in python. its a file object.
-# use .read() to read the file contents into a string.
-# path must be relative to the text file
-import string
+def get_num_words(text):
+    words = text.split()
+    return len(words)
 
-def get_book_text(file_path):
-    with open(file_path) as f:
-        file_contents = f.read()
-        return file_contents
 
-def convert_text(book_text):
-    array_of_words = book_text.split()
-    return len(array_of_words)
-
-def text_converter(book_text):
-    lowercase_text = book_text.lower()
-    word_count_dictionary = {}
-
-    for character in lowercase_text:
-        #if the character is in the dictionary, increment the value at that key (character) by one. 
-        if character in word_count_dictionary:
-            word_count_dictionary[character] += 1
-            
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
         else:
-            #if the character is not in the dictionary, create a new entry with the value of one.
-            word_count_dictionary[character] = 1
+            chars[lowered] = 1
+    return chars
 
-    return word_count_dictionary
 
+def sort_on(d):
+    # sort by the key "num"
+    return d["num"]
+
+
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for ch in num_chars_dict:
+        # you can append a dictionary to your list in one line
+        sorted_list.append({"char": ch, "num": num_chars_dict[ch]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
 
 
